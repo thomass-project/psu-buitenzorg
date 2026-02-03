@@ -1,0 +1,266 @@
+<?php
+session_start();
+
+// --- 1. Security Check & Session Management ---
+if (!isset($_SESSION['masuk']) || $_SESSION['masuk'] !== true) {
+    header("Location: ../index.php");
+    exit();
+}
+
+// Timeout Session (30 Menit)
+if (isset($_SESSION['last_activity']) && (time() - $_SESSION['last_activity'] > 1800)) {
+    header("Location: ../auth/logout.php?timeout=true");
+    exit();
+}
+$_SESSION['last_activity'] = time();
+
+// --- 2. Ambil Data User ---
+$surname = isset($_SESSION['surname']) ? htmlspecialchars($_SESSION['surname']) : 'Student';
+$family_name = isset($_SESSION['family_name']) ? htmlspecialchars($_SESSION['family_name']) : '';
+$full_name = trim($surname . ' ' . $family_name);
+$email = isset($_SESSION['email']) ? htmlspecialchars($_SESSION['email']) : '';
+$dob = isset($_SESSION['dob']) ? htmlspecialchars($_SESSION['dob']) : '';
+?>
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admission Preparation | University of Buitenzorg</title>
+    <link rel="icon" type="image/png" sizes="32x32" href="../assets/icon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="../assets/icon/favicon-16.png">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { 'uni-primary': '#002147', 'uni-gold': '#D4AF37', 'uni-bg': '#F5F7FA' },
+                    fontFamily: { 'display': ['Cinzel', 'serif'], 'serif': ['Cormorant Garamond', 'serif'], 'sans': ['Poppins', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <style>
+        .hero-parallax { background-image: linear-gradient(rgba(0, 33, 71, 0.85), rgba(0, 33, 71, 0.7)), url('../assets/eskola.jpg'); background-attachment: fixed; background-position: center; background-size: cover; }
+        .navbar-scrolled { background-color: rgba(255, 255, 255, 0.98); box-shadow: 0 4px 20px rgba(0,0,0,0.08); padding-top: 15px !important; padding-bottom: 15px !important; color: #1f2937 !important; }
+        .navbar-transparent { background-color: transparent; padding-top: 30px; padding-bottom: 30px; color: white; }
+        .navbar-scrolled #nav-logo { filter: none; }
+        .navbar-transparent #nav-logo { filter: brightness(0) invert(1); }
+        .dropdown-menu { opacity: 0; visibility: hidden; transform: translateY(-10px); transition: all 0.3s ease; }
+        .group:hover .dropdown-menu { opacity: 1; visibility: visible; transform: translateY(0); }
+    </style>
+</head>
+<body class="bg-uni-bg text-gray-800 font-sans antialiased selection:bg-uni-gold selection:text-uni-primary">
+
+<nav id="navbar" class="fixed w-full z-50 transition-all duration-300 navbar-transparent top-0 left-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
+            <div class="flex items-center cursor-pointer gap-3" onclick="window.location.href='../dashboard.php'">
+                <img class="h-12 w-auto transition-all" id="nav-logo" src="../assets/icon/bogor-coa-icon-gray.png" alt="University Logo">
+                <div class="hidden md:block">
+                    <span class="block font-display font-bold text-lg tracking-wider leading-none">Univ. of Buitenzorg</span>
+                    <span class="block text-sm font-serif italic text-uni-gold mt-1">State of Pasundan</span>
+                </div>
+            </div>
+            <div class="hidden lg:flex space-x-4 items-center">
+                <a href="../dashboard.php" class="hover:text-uni-gold transition font-medium text-sm tracking-wide">Back to Dashboard</a>
+                <div class="relative group">
+                    <button class="flex items-center gap-2 focus:outline-none ml-2 pl-4 mr-10 border-l">
+                        <div class="text-left hidden xl:block">
+                            <span class="block text-[10px] uppercase tracking-wider opacity-100 nav-text">Hello,</span>
+                            <span class="block text-sm font-bold text-uni-gold"><?php echo $surname; ?></span>
+                        </div>
+                    </button>
+                    <div class="dropdown-menu absolute right-0 mt-2 w-56 bg-white rounded-md shadow-xl py-2 border-t-4 border-uni-gold z-50">
+                        <div class="px-4 py-3 border-b border-gray-100 bg-gray-50">
+                            <p class="text-xs text-gray-500 uppercase tracking-wider">Signed in as</p>
+                            <p class="text-sm font-bold text-uni-primary truncate"><?php echo $full_name; ?></p>
+                        </div>
+                            <a href="../dashboard.php#online-application" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-uni-primary">
+                                <i class="fas fa-file-signature mr-2 w-4 text-center"></i> My Application
+                            </a>
+                            <a href="../profile.php" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-uni-primary">
+                                <i class="fas fa-user-cog mr-2 w-4 text-center"></i> Edit Profile
+                            </a>
+                        <a href="../auth/logout.php" class="block px-4 py-2 text-sm hover:bg-gray-100 text-red-600 font-bold"><i class="fas fa-sign-out-alt mr-2"></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </nav>
+
+    <header class="hero-parallax h-[80vh] flex items-center justify-center text-center px-4 relative">
+        <div class="relative z-10 max-w-5xl mx-auto pt-10"> 
+            <img src="../assets/icon/bogor-coa-icon-gray.png" class="h-24 md:h-32 mx-auto mb-6 brightness-0 invert drop-shadow-2xl opacity-90" alt="Coat of Arms">
+            <p class="text-uni-gold font-bold tracking-[0.5em] uppercase text-sm mb-4">Application Guide & Checklist</p>
+            <h1 class="text-5xl md:text-6xl font-display text-uni-primary font-bold mb-4 drop-shadow-lg">Admission Dashboard</h1>
+            <p class="text-xl font-serif italic text-gray-900 max-w-2xl mx-auto">Prepare your future with precision. Ensure all documents meet our rigorous standards.</p>
+        </div>
+        <div class="absolute inset-0 bg-gradient-to-b from-uni-primary/0 from-35% to-uni-bg"></div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 mt-10 relative z-20 pb-20">
+        <div class="flex justify-between items-end mb-10 mt-20 border-b-2 border-gray-200 pb-4">
+            <div>
+                <h2 class="text-2xl font-display font-bold text-uni-primary">Application Guide</h2>
+            </div>
+        </div>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+            <div class="lg:w-2/3">
+                <div class="bg-white rounded-xl shadow-2xl pt-10 pr-10 pl-10 pb-20 min-h-screen border-t-4 border-uni-gold">
+                    <div class="mb-10">
+                        <h2 class="text-3xl font-display font-bold text-uni-primary">Document Checklist</h2>
+                        <p class="text-gray-500 mt-2">All documents must be scanned in high resolution PDF format.</p>
+                    </div>
+
+                    <div class="space-y-6">    
+                        <div class="flex flex-col md:flex-row gap-6 p-6 border rounded-xl bg-gray-50 items-start hover:border-uni-gold transition">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-uni-primary">1. Online Application Form</h4>
+                                <p class="text-sm text-gray-600 mt-1">Must be filled out in English. Ensure your name matches your passport exactly.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6 p-6 border rounded-xl bg-white items-start hover:border-uni-gold transition">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-uni-primary">2. Motivation Letter</h4>
+                                <p class="text-sm text-gray-600 mt-1">A distinct letter for each study program applied for. </p>
+                                <ul class="text-xs text-gray-500 mt-2 list-disc pl-4 space-y-1">
+                                    <li>Format: Times New Roman, 12pt size.</li>
+                                    <li>Length: Minimum 1 page, maximum 2 pages.</li>
+                                    <li>Content: Why you chose this program, your future goals, and why Univ. of Buitenzorg.</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6 p-6 border rounded-xl bg-gray-50 items-start hover:border-uni-gold transition">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-uni-primary">3. Proof of Language Proficiency</h4>
+                                <p class="text-sm text-gray-600 mt-1">Scan of original certificate.</p>
+                                <div class="grid grid-cols-2 gap-2 mt-2">
+                                    <span class="text-xs bg-white border px-2 py-1 rounded">TOEFL iBT > 80</span>
+                                    <span class="text-xs bg-white border px-2 py-1 rounded">IELTS > 6.0</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6 p-6 border rounded-xl bg-white items-start hover:border-uni-gold transition">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-uni-primary">4. School Certificates & Translations</h4>
+                                <p class="text-sm text-gray-600 mt-1">Scanned copy of your original High School Diploma / Bachelor's Diploma.</p>
+                                <p class="text-xs text-red-500 mt-1 font-bold"><i class="fas fa-exclamation-circle"></i> Must include a sworn translation into English or Sundanese if the original is in another language.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6 p-6 border rounded-xl bg-gray-50 items-start hover:border-uni-gold transition">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-uni-primary">5. Transcript of Records</h4>
+                                <p class="text-sm text-gray-600 mt-1">List of all subjects taken and grades received.</p>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6 p-6 border rounded-xl bg-white items-start hover:border-uni-gold transition">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-uni-primary">6. Medical Certificate</h4>
+                                <p class="text-sm text-gray-600 mt-1">Must be issued by a physician within the last 3 months.</p>
+                                <ul class="text-xs text-gray-500 mt-2 list-disc pl-4 space-y-1">
+                                    <li>Negative status for: HIV/AIDS, Hepatitis B, Hepatitis C.</li>
+                                    <li>Chest X-ray report (Tuberculosis screening).</li>
+                                    <li>Proof of Yellow Fever vaccination (for applicants from risk zones).</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col md:flex-row gap-6 p-6 border rounded-xl bg-gray-50 items-start hover:border-uni-gold transition">
+                            <div class="flex-1">
+                                <h4 class="font-bold text-lg text-uni-primary">7. Identification Document</h4>
+                                <p class="text-sm text-gray-600 mt-1">Scan of a valid Passport (must be valid for at least 18 months from the start of the study program).</p>
+                            </div>
+                        </div>
+                    </div>
+
+                        <div class="mt-12 text-center">
+                            <a href="../#online-application" class="bg-uni-primary text-white font-display font-bold py-4 px-10 rounded-xl hover:bg-uni-gold hover:text-uni-primary transition shadow-xl uppercase tracking-wider">Start Application</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="lg:w-1/3 space-y-6">
+                    
+                    <div class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-uni-gold">
+                        <h3 class="font-display font-bold text-uni-primary text-xl mb-4">Verification Process</h3>
+                        <div class="relative border-l-2 border-gray-200 ml-3 space-y-6">
+                            <div class="ml-6 relative">
+                                <span class="absolute -left-[33px] bg-uni-gold w-4 h-4 rounded-full border-2 border-white"></span>
+                                <h5 class="font-bold text-sm">Submission</h5>
+                                <p class="text-xs text-gray-500">System check</p>
+                            </div>
+                            <div class="ml-6 relative">
+                                <span class="absolute -left-[33px] bg-gray-300 w-4 h-4 rounded-full border-2 border-white"></span>
+                                <h5 class="font-bold text-sm">Admin Verification</h5>
+                                <p class="text-xs text-gray-500">3-5 Working Days</p>
+                            </div>
+                            <div class="ml-6 relative">
+                                <span class="absolute -left-[33px] bg-gray-300 w-4 h-4 rounded-full border-2 border-white"></span>
+                                <h5 class="font-bold text-sm">Academic Review</h5>
+                                <p class="text-xs text-gray-500">Faculty decision</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-uni-primary text-white rounded-xl shadow-xl p-6 border-t-4 border-uni-gold">
+                        <h3 class="font-display font-bold text-xl mb-4">Resources</h3>
+                        <ul class="space-y-3 text-sm">
+                            <li><a href="#" class="flex items-center gap-2 hover:text-uni-gold"><i class="fas fa-file-download"></i> Motivation Letter Template</a></li>
+                            <li><a href="#" class="flex items-center gap-2 hover:text-uni-gold"><i class="fas fa-file-download"></i> Medical Form Standard</a></li>
+                            <li><a href="#" class="flex items-center gap-2 hover:text-uni-gold"><i class="fas fa-file-download"></i> Financial Statement Form</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-white rounded-xl shadow-xl p-6 border-t-4 border-uni-gold">
+                        <h3 class="font-display font-bold text-uni-primary text-xl mb-4">Avoid Mistakes</h3>
+                        <div class="space-y-3">
+                            <details class="group">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-sm hover:text-uni-gold">
+                                    <span>Unclear Scans</span>
+                                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                                </summary>
+                                <p class="text-xs text-gray-600 mt-2 group-open:animate-fadeIn">Ensure all text is readable. Do not photograph with a phone; use a scanner.</p>
+                            </details>
+                            <details class="group">
+                                <summary class="flex justify-between items-center font-medium cursor-pointer list-none text-sm hover:text-uni-gold">
+                                    <span>Missing Translations</span>
+                                    <span class="transition group-open:rotate-180"><i class="fas fa-chevron-down"></i></span>
+                                </summary>
+                                <p class="text-xs text-gray-600 mt-2 group-open:animate-fadeIn">Documents not in English or Sundanese will be rejected immediately.</p>
+                            </details>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-uni-primary text-white border-t-8 border-uni-gold mt-20">
+        <div class="max-w-7xl mx-auto px-4 py-12 text-center">
+            <p class="text-xs text-gray-400 uppercase tracking-widest mb-4">Admission Office Portal</p>
+            <p class="text-sm text-gray-300">&copy; 2026 University of Buitenzorg. All Rights Reserved.</p>
+        </div>
+    </footer>
+    <script>
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const logo = document.getElementById('nav-logo');
+            if (window.scrollY > 50) {
+                navbar.classList.remove('navbar-transparent'); navbar.classList.add('navbar-scrolled');
+                logo.style.filter = "none";
+            } else {
+                navbar.classList.add('navbar-transparent'); navbar.classList.remove('navbar-scrolled');
+                logo.style.filter = "brightness(0) invert(1)";
+            }
+        });
+    </script>
+</body>
+</html>
