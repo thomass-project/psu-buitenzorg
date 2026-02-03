@@ -150,7 +150,6 @@
     </footer>
 
     <script>
-        // Navbar Scroll
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             const logo = document.getElementById('nav-logo');
@@ -175,21 +174,17 @@
             }
         });
 
-        // --- LOGIN LOGIC WITH JS ---
         document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault(); // Mencegah reload halaman
+            e.preventDefault(); 
             
             const user = document.getElementById('username').value;
             const pass = document.getElementById('password').value;
             const errorMsg = document.getElementById('error-msg');
             const errorText = document.getElementById('error-text');
 
-            // Hardcode credential sesuai request
             if (user === 'thomass' && pass === '2026') {
-                // Simpan session di browser storage
                 sessionStorage.setItem('masuk', 'true');
                 
-                // Simpan data user dummy jika belum ada
                 if(!sessionStorage.getItem('surname')) sessionStorage.setItem('surname', 'Thomas');
                 if(!sessionStorage.getItem('family_name')) sessionStorage.setItem('family_name', 'Geri');
                 if(!sessionStorage.getItem('email')) sessionStorage.setItem('email', 'thomas.geri@buitenzorg.ac.id');
@@ -197,10 +192,8 @@
 
                 sessionStorage.setItem('last_activity', Date.now());
 
-                // Redirect ke dashboard html
                 window.location.href = 'dashboard.html';
             } else {
-                // Tampilkan Error
                 errorMsg.classList.remove('hidden');
                 errorText.innerText = "Invalid username or password.";
             }
