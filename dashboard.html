@@ -192,15 +192,78 @@
         </div>
     </div>
 
-    <div id="mobile-menu" class="hidden bg-uni-primary absolute top-full left-0 w-full border-t border-gray-700 shadow-xl lg:hidden">
-        <div class="p-4 border-b border-gray-700 bg-uni-secondary">
-            <span class="block text-xs text-gray-400">Logged in as:</span>
-            <span class="block text-white font-bold" id="mobile-fullname">Student Name</span>
+    <div id="mobile-menu" class="hidden bg-uni-primary absolute top-full left-0 w-full border-t border-gray-700 shadow-xl lg:hidden max-h-[80vh] overflow-y-auto">
+        
+        <div class="p-4 border-b border-gray-700 bg-uni-secondary sticky top-0 z-10">
+            <div class="flex items-center justify-between">
+                <div>
+                    <span class="block text-xs text-gray-400">Logged in as:</span>
+                    <span class="block text-white font-bold" id="mobile-fullname">Student Name</span>
+                </div>
+                <a href="profile.html" class="text-uni-gold hover:text-white text-sm">
+                    <i class="fas fa-user-cog"></i> Edit
+                </a>
+            </div>
         </div>
-        <a href="#about-college" onclick="showContent('about-college');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-6 py-4 text-sm text-white border-b border-gray-800 hover:bg-uni-secondary">About Us</a>
-        <a href="#online-application" onclick="showContent('online-application');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-6 py-4 text-sm text-white border-b border-gray-800 hover:bg-uni-secondary">Apply Now</a>
-        <a href="#news-events" onclick="showContent('news-events');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-6 py-4 text-sm text-white border-b border-gray-800 hover:bg-uni-secondary">News</a>
-        <button onclick="logout()" class="block w-full text-left px-6 py-4 text-sm text-red-400 hover:bg-uni-secondary hover:text-red-300">Logout</button>
+
+        <a href="#about-college" onclick="showContent('about-college');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-6 py-3 text-sm text-white border-b border-gray-800 hover:bg-uni-secondary">
+            About Us
+        </a>
+
+        <a href="#academics-info" onclick="showContent('academics-info');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-6 py-3 text-sm text-white border-b border-gray-800 hover:bg-uni-secondary">
+            Academics
+        </a>
+
+        <div class="bg-black/20 border-b border-gray-800">
+            <div class="px-6 py-2 text-xs font-bold text-uni-gold uppercase tracking-wider opacity-80">
+                Admission
+            </div>
+            <a href="admission/preparation.html" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary border-b border-gray-800 border-opacity-30">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> Admission Preparation
+            </a>
+            <a href="#online-application" onclick="showContent('online-application');document.getElementById('mobile-menu').classList.add('hidden')" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary border-b border-gray-800 border-opacity-30">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> Online Application
+            </a>
+            <a href="admission/international.html" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary border-b border-gray-800 border-opacity-30">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> For Internationals
+            </a>
+            <a href="admission/scholarship.html" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary border-b border-gray-800 border-opacity-30">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> Scholarships & Grants
+            </a>
+            <a href="#tuition-fee" onclick="showContent('tuition-fee');document.getElementById('mobile-menu').classList.add('hidden')" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> Tuition & Costs
+            </a>
+        </div>
+
+        <a href="#campus-life" onclick="showContent('campus-life');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-6 py-3 text-sm text-white border-b border-gray-800 hover:bg-uni-secondary">
+            Campus Life
+        </a>
+
+        <div class="bg-black/20 border-b border-gray-800">
+            <div class="px-6 py-2 text-xs font-bold text-uni-gold uppercase tracking-wider opacity-80">
+                Resources
+            </div>
+            <a href="#student-services" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary border-b border-gray-800 border-opacity-30">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> Student Services
+            </a>
+            <a href="#research-innovation" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary border-b border-gray-800 border-opacity-30">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> Research
+            </a>
+            <a href="#alumni" onclick="document.getElementById('mobile-menu').classList.add('hidden')" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary border-b border-gray-800 border-opacity-30">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> Alumni
+            </a>
+            <a href="#news-events" onclick="showContent('news-events');document.getElementById('mobile-menu').classList.add('hidden')" class="block pl-10 pr-6 py-3 text-sm text-gray-300 hover:text-white hover:bg-uni-secondary">
+                <i class="fas fa-angle-right mr-2 text-xs"></i> News & Events
+            </a>
+        </div>
+
+        <a href="#online-application" onclick="showContent('online-application');document.getElementById('mobile-menu').classList.add('hidden')" class="block px-6 py-3 text-sm text-white border-b border-gray-800 hover:bg-uni-secondary">
+            <i class="fas fa-file-signature mr-2 w-5"></i> My Application
+        </a>
+
+        <button onclick="logout()" class="block w-full text-left px-6 py-4 text-sm text-red-400 bg-gray-900 hover:bg-red-900/30 hover:text-red-300 transition font-bold border-t border-gray-700">
+            <i class="fas fa-sign-out-alt mr-2"></i> Logout
+        </button>
     </div>
 </nav>
 
@@ -772,4 +835,5 @@
 </body>
 
 </html>
+
 
