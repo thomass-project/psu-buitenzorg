@@ -8,19 +8,17 @@
     <link rel="icon" type="image/png" sizes="16x16" href="./assets/icon/favicon-16.png">
     
     <script>
-        // Cek Login
         if (sessionStorage.getItem('masuk') !== 'true') {
             window.location.href = 'index.html';
         }
 
-        // Cek Timeout (30 Menit = 1800000 ms)
         const lastActivity = sessionStorage.getItem('last_activity');
         const now = Date.now();
         if (lastActivity && (now - lastActivity > 1800000)) {
             sessionStorage.clear();
             window.location.href = 'index.html?message=timeout';
         } else {
-            sessionStorage.setItem('last_activity', now); // Update waktu
+            sessionStorage.setItem('last_activity', now); 
         }
     </script>
 
@@ -49,7 +47,6 @@
     </script>
 
     <style>
-        /* Custom Utilities - SAMA SEPERTI INDEX.HTML */
         .hero-parallax {
             background-image: linear-gradient(rgba(0, 33, 71, 0.85), rgba(0, 33, 71, 0.7)), url('./assets/background/bg-seal.png');
             background-attachment: fixed;
@@ -70,7 +67,6 @@
             padding-bottom: 30px;
         }
 
-        /* Form Styling */
         select, input[type="text"], input[type="email"], input[type="number"], input[type="date"] {
             transition: all 0.3s ease;
         }
@@ -690,24 +686,19 @@
 </footer>
 
 <script>
-    // POPULATE DATA USER DARI SESSION STORAGE
     document.addEventListener("DOMContentLoaded", function() {
-        // Ambil data
         const surname = sessionStorage.getItem('surname') || 'Student';
         const familyName = sessionStorage.getItem('family_name') || '';
         const fullName = surname + ' ' + familyName;
         const email = sessionStorage.getItem('email') || '';
         const dob = sessionStorage.getItem('dob') || '';
 
-        // Update Navbar
         document.getElementById('nav-surname').innerText = surname;
         document.getElementById('nav-fullname').innerText = fullName;
         
-        // Update Mobile Menu
         const mobileName = document.getElementById('mobile-fullname');
         if(mobileName) mobileName.innerText = fullName;
 
-        // Update Form Inputs
         const inFullname = document.getElementById('input-fullname');
         if(inFullname) inFullname.value = fullName;
         
@@ -717,7 +708,6 @@
         const inDob = document.getElementById('input-dob');
         if(inDob) inDob.value = dob;
         
-        // Tuition Filter Default
         const filter = document.getElementById('facultyFilter');
         if(filter) {
             filter.value = 'cs';
@@ -733,7 +723,6 @@
         window.location.href = 'index.html?message=logged_out';
     }
 
-    // Fungsi Filter Table
     function filterRows(category) {
         const rows = document.querySelectorAll('.program-row');
         rows.forEach(row => {
@@ -745,7 +734,6 @@
         });
     }
 
-    // Logic Dropdown, Scroll, Content Switching (Sama persis dari file asli)
     function toggleDropdown() {
         const dropdown = document.getElementById('dropdownCheckbox');
         const arrow = document.getElementById('arrow-icon');
@@ -833,8 +821,8 @@
 
 </script>
 </body>
-
 </html>
+
 
 
 
