@@ -50,7 +50,6 @@
     
     <script>
         window.addEventListener('DOMContentLoaded', (event) => {
-            // Simulasi pesan logout/timeout dari URL
             const queryString = window.location.search;
             const urlParams = new URLSearchParams(queryString);
             const message = urlParams.get('message');
@@ -69,7 +68,6 @@
                 window.history.replaceState({}, document.title, newUrl);
             }
 
-            // Cek jika user sudah login, ubah tombol Login jadi Dashboard
             if(sessionStorage.getItem('masuk') === 'true'){
                 const loginBtn = document.querySelector('a[href="login.html"]');
                 if(loginBtn) {
@@ -422,7 +420,6 @@
     </footer>
 
     <script>
-        // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             const logo = document.getElementById('nav-logo');
@@ -442,7 +439,6 @@
             }
         });
 
-        // Tab Switching Logic
         function showContent(sectionId) {
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(section => {
@@ -471,5 +467,5 @@
         });
     </script>
 </body>
-
 </html>
+
