@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edit Profile | University of Buitenzorg</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/icon/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="./assets/icon/favicon-16.png">
+    
+    <script>
+        if (sessionStorage.getItem('masuk') !== 'true') {
+            window.location.href = 'index.html';
+        }
+    </script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'uni-primary': '#002147', 
+                        'uni-secondary': '#003366', 
+                        'uni-gold': '#D4AF37',    
+                        'uni-bg': '#F5F7FA',
+                    },
+                    fontFamily: {
+                        'display': ['Cinzel', 'serif'], 
+                        'serif': ['Lora', 'serif'],
+                        'sans': ['Poppins', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .navbar-scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            padding-top: 0.5rem;
+            padding-bottom: 0.5rem;
+        }
+        .navbar-scrolled .nav-text { color: #002147 !important; }
+        .navbar-scrolled .nav-icon { filter: none !important; }
+        
+        .navbar-transparent { padding-top: 1.5rem; padding-bottom: 1.5rem; }
+        .navbar-transparent .nav-text { color: white; }
+        .navbar-transparent .nav-icon { filter: brightness(0) invert(1); }
+
+        input[type="text"], input[type="email"], input[type="password"] {
+            transition: all 0.3s ease;
+        }
+        input:focus {
+            border-color: #D4AF37;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-uni-bg text-gray-800 font-sans antialiased flex flex-col min-h-screen">
+
+    <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 navbar-transparent top-0 left-0 text-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <img class="h-12 w-auto filter brightness-0 invert transition-all nav-icon" id="nav-logo" src="./assets/icon/bogor-coa-icon-gray.png" alt="University Logo">
+                    <div class="hidden md:block nav-text transition-colors">
+                        <span class="block font-display font-bold text-lg tracking-wider leading-none">Univ. of Buitenzorg</span>
+                        <span class="block text-xs font-serif italic text-uni-gold mt-1">Province of Pasundan</span>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-4">
+                    <a href="dashboard.html" class="text-sm font-semibold font-display tracking-widest hover:text-uni-gold transition nav-text flex items-center gap-2">
+                        <i class="fas fa-arrow-left"></i> Back to Dashboard
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div id="notification" class="fixed top-24 right-20 z-[100] transform transition-all duration-500 ease-in-out translate-x-full opacity-0">
+        <div id="notif-box" class="flex items-center p-4 mb-4 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-l-4 bg-white border-green-500 min-w-[320px]">
+            <div id="notif-icon-box" class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-full text-green-500 bg-green-50">
+                <i id="notif-icon" class="fas fa-check-circle text-lg"></i>
+            </div>
+            <div class="ml-4 mr-8">
+                <p id="notif-title" class="font-bold text-uni-primary text-sm leading-none">Update Successful</p>
+                <p id="notif-msg" class="text-gray-500 text-xs mt-1">Your profile info is now up to date.</p>
+            </div>
+            <button onclick="closeNotif()" class="absolute top-2 right-2 text-gray-300 hover:text-gray-600 transition">
+                <i class="fas fa-times text-xs"></i>
+            </button>
+        </div>
+    </div>
+
+    <header class="h-[50vh] flex items-center justify-center text-center px-4 relative bg-uni-primary">
+        <div class="absolute inset-0 z-0 overflow-hidden">
+            <img src="./assets/background/bg-main-building.jpg" class="w-full h-full object-cover opacity-40 mix-blend-overlay">
+            <div class="absolute inset-0 bg-gradient-to-b from-uni-primary/80 to-uni-bg"></div>
+        </div>
+
+        <div class="relative z-10 max-w-5xl mx-auto pt-10"> 
+            <h1 class="text-4xl md:text-5xl font-display font-bold text-white mb-2 drop-shadow-lg">
+                Edit <span class="text-uni-gold">Profile</span>
+            </h1>
+            <p class="text-lg text-gray-300 font-light font-serif italic">
+                Update your personal account information and security settings.
+            </p>
+        </div>
+    </header>
+
+    <main class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 -mt-20 relative z-20 pb-20 flex-grow w-full">
+        
+        <div class="bg-white rounded-xl shadow-2xl overflow-hidden border-t-8 border-uni-gold">
+            <div class="bg-uni-primary px-8 py-6 border-b border-gray-700">
+                <h2 class="text-xl font-display font-bold text-white flex items-center gap-3">
+                    <i class="fas fa-user-edit text-uni-gold"></i> Account Details
+                </h2>
+            </div>
+
+            <div class="p-8 md:p-10">
+                <form id="profileForm" class="space-y-8">
+                    
+                    <div>
+                        <h3 class="text-lg font-bold text-uni-primary border-b border-gray-200 pb-2 mb-6">Personal Information</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Surname (First Name)</label>
+                                <input type="text" id="surname" name="surname" 
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-uni-gold bg-gray-50" required>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-semibold text-gray-700 mb-2">Family Name (Last Name)</label>
+                                <input type="text" id="family_name" name="family_name" 
+                                       class="w-full px-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-uni-gold bg-gray-50" required>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">Email Address</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                                    <i class="fas fa-envelope"></i>
+                                </span>
+                                <input type="email" id="email" name="email" 
+                                       class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-uni-gold bg-gray-50" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-uni-bg p-6 rounded-lg border border-gray-200">
+                        <h3 class="text-lg font-bold text-uni-primary mb-1">Security Settings</h3>
+                        <p class="text-xs text-gray-500 mb-4">Leave the field below empty if you do not wish to change your password.</p>
+                        
+                        <div>
+                            <label class="block text-sm font-semibold text-gray-700 mb-2">New Password</label>
+                            <div class="relative">
+                                <span class="absolute inset-y-0 left-0 flex items-center pl-3 text-gray-500">
+                                    <i class="fas fa-lock"></i>
+                                </span>
+                                <input type="password" id="new_password" name="new_password" placeholder="Enter new password to change" 
+                                       class="w-full pl-10 pr-4 py-3 rounded-lg border border-gray-300 focus:outline-none focus:border-uni-gold bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center justify-end gap-4 pt-4 border-t border-gray-100">
+                        <a href="dashboard.html" class="px-6 py-2.5 rounded-lg border border-gray-300 text-gray-600 font-bold hover:bg-gray-100 transition">
+                            Cancel
+                        </a>
+                        <button type="submit" class="px-8 py-3 bg-uni-primary text-white rounded-lg shadow-lg hover:bg-uni-gold hover:text-uni-primary transition font-bold uppercase tracking-wider text-sm transform hover:-translate-y-0.5">
+                            Save Changes
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-uni-primary text-white border-t-4 border-uni-gold mt-auto">
+        <div class="max-w-7xl mx-auto px-4 py-8 text-center">
+            <p class="text-sm text-gray-400">&copy; 2026 University of Buitenzorg. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Init: Load data dari Session Storage ke Form
+        document.addEventListener("DOMContentLoaded", function() {
+            document.getElementById('surname').value = sessionStorage.getItem('surname') || '';
+            document.getElementById('family_name').value = sessionStorage.getItem('family_name') || '';
+            document.getElementById('email').value = sessionStorage.getItem('email') || '';
+        });
+
+        // Handle Save
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simpan data baru
+            sessionStorage.setItem('surname', document.getElementById('surname').value);
+            sessionStorage.setItem('family_name', document.getElementById('family_name').value);
+            sessionStorage.setItem('email', document.getElementById('email').value);
+            
+            // Tampilkan Notifikasi Sukses
+            showNotif('success');
+        });
+
+        const notif = document.getElementById('notification');
+
+        function showNotif(type) {
+            notif.classList.remove('hidden');
+            setTimeout(() => {
+                notif.classList.remove('translate-x-full', 'opacity-0');
+                notif.classList.add('translate-x-0', 'opacity-100');
+            }, 100);
+            
+            // Auto close after 3s
+            setTimeout(closeNotif, 3000);
+        }
+
+        function closeNotif() {
+            if (notif) {
+                notif.classList.add('translate-x-full', 'opacity-0');
+                notif.classList.remove('translate-x-0', 'opacity-100');
+            }
+        }
+
+        // Navbar Scroll
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            const logo = document.getElementById('nav-logo');
+            const navTexts = document.querySelectorAll('.nav-text');
+            
+            if (window.scrollY > 50) {
+                navbar.classList.remove('navbar-transparent', 'text-white');
+                navbar.classList.add('navbar-scrolled', 'text-gray-800');
+                logo.classList.remove('invert', 'brightness-0');
+                navTexts.forEach(el => el.classList.remove('text-white'));
+                navTexts.forEach(el => el.classList.add('text-uni-primary'));
+            } else {
+                navbar.classList.add('navbar-transparent', 'text-white');
+                navbar.classList.remove('navbar-scrolled', 'text-gray-800');
+                logo.classList.add('invert', 'brightness-0');
+                navTexts.forEach(el => el.classList.add('text-white'));
+                navTexts.forEach(el => el.classList.remove('text-uni-primary'));
+            }
+        });
+    </script>
+
+</body>
+</html>
