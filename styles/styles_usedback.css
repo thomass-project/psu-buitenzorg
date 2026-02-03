@@ -1,0 +1,211 @@
+@charset "UTF-8";a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline
+}
+
+h1,h2,h3,h4,p {
+    overflow: visible!important
+}
+
+article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
+    display: block
+}
+
+img {
+    overflow: auto!important
+}
+
+body {
+    zoom:80%;margin: 0
+}
+
+
+/* content-page */
+.content-page__intro {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1450px;
+    padding-left: 30px;
+    padding-right: 30px
+}
+
+.content-page__intro:after {
+    clear: both
+}
+
+@media only screen and (max-width: 1024px) {
+.content-page__intro {
+    padding-left:15px;
+    padding-right: 15px
+    }
+}
+
+.content-page__intro__container {
+    float: left;
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100%
+}
+
+.content-page__intro__container__text {
+    font-family: Poppins,helvetica,sans-serif;
+    font-size: 24px;
+    line-height: 34px;
+    letter-spacing: 1px
+}
+
+@media screen and (max-width: 768px) {
+.content-page__intro__container__text {
+    font-size:18px;
+    line-height: 26px
+    }
+}
+
+@media only screen and (max-width: 1024px) {
+    .content-page__intro__container {
+        padding-left:10px;
+        padding-right: 10px
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .content-page__intro__container {
+        padding-left:10px;
+        padding-right: 10px
+    }
+}
+
+.content-page__intro__container__text {
+    font-weight: 500;
+    font-family: Lora,Georgia,Times,serif;
+    color: #050d2b;
+    max-width: 900px;
+    text-align: center;
+    margin: 0 auto
+}
+
+.content-page .section {
+    margin-top: 50px;
+    margin-bottom: 50px
+}
+
+
+/* header */
+.header.take-over-banner .take-over__banner+.header__logo {
+    top: 85px
+}
+
+.js-header-small .header.take-over-banner .take-over__banner+.header__logo {
+    top: 83px
+}
+
+@media screen and (max-width: 756px) {
+    .header.take-over-banner .take-over__banner+.header__logo {
+        top:101px
+    }
+}
+
+@media screen and (max-width: 449px) {
+    .header.take-over-banner .take-over__banner+.header__logo {
+        top:137px
+    }
+}
+
+.accordion:after,.accordion:before,.article-header:after,.article-header:before,.article-header__introduction:after,.article-header__introduction:before,.article:after,.article:before,.audio:after,.audio:before,.audio__container__player:after,.audio__container__player:before,.calendar-list__content__list__item:after,.calendar-list__content__list__item:before,.calendar-month__dates:after,.calendar-month__dates:before,.calendar:after,.calendar:before,.comming-events:after,.comming-events:before,.content-page__intro:after,.content-page__intro:before,.danish-decorations__container:after,.danish-decorations__container:before,.danish-decorations__container__filters:after,.danish-decorations__container__filters:before,.double-imagespot:after,.double-imagespot:before,.facts:after,.facts:before,.featured-articles__header:after,.featured-articles__header:before,.featured-articles__row:after,.featured-articles__row:before,.form-checkbox-group:after,.form-checkbox-group:before,.header__content__navigation:after,.header__content__navigation:before,.headline:after,.headline:before,.home-page__header:after,.home-page__header:before,.iframe:after,.iframe:before,.introduction:after,.introduction:before,.large-imagespot:after,.large-imagespot:before,.line-of-succession:after,.line-of-succession:before,.line-of-succession__monarch:after,.line-of-succession__monarch:before,.mediabank-library:after,.mediabank-library:before,.news-page__form__filters:after,.news-page__form__filters:before,.news-page__header__title:after,.news-page__header__title:before,.news-page__results:after,.news-page__results:before,.press-photo-page__main__content:after,.press-photo-page__main__content:before,.press-photo-page__main__filter__grid:after,.press-photo-page__main__filter__grid:before,.press-photo-page__main__header__title:after,.press-photo-page__main__header__title:before,.press-photo-page__meta:after,.press-photo-page__meta:before,.quote:after,.quote:before,.related-content:after,.related-content:before,.related-content__nav:after,.related-content__nav:before,.related-stream__header:after,.related-stream__header:before,.rich-text:after,.rich-text:before,.royal-line__monarch__item:after,.royal-line__monarch__item:before,.search-page__main__header:after,.search-page__main__header:before,.search-result-page__main__form__filters:after,.search-result-page__main__form__filters:before,.search-result-page__main__header__title:after,.search-result-page__main__header__title:before,.search-result-page__main__results:after,.search-result-page__main__results:before,.section-header:after,.section-header:before,.social-media-post:after,.social-media-post:before,.stream__list:after,.stream__list:before,.video-spot:after,.video-spot:before {
+    content: "";
+    display: table
+}
+
+.accordion:after,.article-header:after,.article-header__introduction:after,.article:after,.audio:after,.audio__container__player:after,.calendar-list__content__list__item:after,.calendar-month__dates:after,.calendar:after,.comming-events:after,.content-page__intro:after,.danish-decorations__container:after,.danish-decorations__container__filters:after,.double-imagespot:after,.facts:after,.featured-articles__header:after,.featured-articles__row:after,.form-checkbox-group:after,.header__content__navigation:after,.headline:after,.home-page__header:after,.iframe:after,.introduction:after,.large-imagespot:after,.line-of-succession:after,.line-of-succession__monarch:after,.mediabank-library:after,.news-page__form__filters:after,.news-page__header__title:after,.news-page__results:after,.press-photo-page__main__content:after,.press-photo-page__main__filter__grid:after,.press-photo-page__main__header__title:after,.press-photo-page__meta:after,.quote:after,.related-content:after,.related-content__nav:after,.related-stream__header:after,.rich-text:after,.royal-line__monarch__item:after,.search-page__main__header:after,.search-result-page__main__form__filters:after,.search-result-page__main__header__title:after,.search-result-page__main__results:after,.section-header:after,.social-media-post:after,.stream__list:after,.video-spot:after {
+    clear: both
+}
+
+.accordion,.article-header,.article-header__introduction,.audio,.calendar,.comming-events,.content-page__intro,.danish-decorations__container,.double-imagespot,.facts,.featured-articles__header,.featured-articles__row,.header__content__navigation,.headline,.home-page__header,.iframe,.introduction,.large-imagespot,.line-of-succession,.news-page__header__title,.news-page__results,.press-photo-page__main__content,.press-photo-page__main__filter__grid,.press-photo-page__main__header__title,.press-photo-page__meta,.quote,.related-content,.related-stream__header,.rich-text,.search-page__main__header,.search-result-page__main__header__title,.search-result-page__main__results,.section-header,.social-media-post,.stream__list,.video-spot {
+    width: 100%;
+    margin: 0 auto;
+    max-width: 1450px;
+    padding-left: 30px;
+    padding-right: 30px
+}
+
+@media only screen and (max-width: 1024px) {
+    .accordion,.article-header,.article-header__introduction,.audio,.calendar,.comming-events,.content-page__intro,.danish-decorations__container,.double-imagespot,.facts,.featured-articles__header,.featured-articles__row,.header__content__navigation,.headline,.home-page__header,.iframe,.introduction,.large-imagespot,.line-of-succession,.news-page__header__title,.news-page__results,.press-photo-page__main__content,.press-photo-page__main__filter__grid,.press-photo-page__main__header__title,.press-photo-page__meta,.quote,.related-content,.related-stream__header,.rich-text,.search-page__main__header,.search-result-page__main__header__title,.search-result-page__main__results,.section-header,.social-media-post,.stream__list,.video-spot {
+        padding-left:15px;
+        padding-right: 15px
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .accordion,.article-header,.article-header__introduction,.audio,.calendar,.comming-events,.content-page__intro,.danish-decorations__container,.double-imagespot,.facts,.featured-articles__header,.featured-articles__row,.header__content__navigation,.headline,.home-page__header,.iframe,.introduction,.large-imagespot,.line-of-succession,.news-page__header__title,.news-page__results,.press-photo-page__main__content,.press-photo-page__main__filter__grid,.press-photo-page__main__header__title,.press-photo-page__meta,.quote,.related-content,.related-stream__header,.rich-text,.search-page__main__header,.search-result-page__main__header__title,.search-result-page__main__results,.section-header,.social-media-post,.stream__list,.video-spot {
+        padding-left:0;
+        padding-right: 0
+    }
+}
+
+.accordion__container__item__content h1,.article--full-width .article__link__content__title,.article--large-font-size .article__link__content__title,.article-header__content__title,.facts__container__column__content__text h1,.featured-articles__header__content__title,.headline__title,.related-content__title,.related-stream__header__title,.rich-text__container__content h1 {
+    font-family: Lora,Georgia,Times,serif;
+    font-size: 46px;
+    line-height: 60px;
+    font-weight: 400
+}
+
+@media screen and (max-width: 1219px) {
+    .accordion__container__item__content h1,.article--full-width .article__link__content__title,.article--large-font-size .article__link__content__title,.article-header__content__title,.facts__container__column__content__text h1,.featured-articles__header__content__title,.headline__title,.related-content__title,.related-stream__header__title,.rich-text__container__content h1 {
+        font-size:42px;
+        line-height: 56px
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .accordion__container__item__content h1,.article--full-width .article__link__content__title,.article--large-font-size .article__link__content__title,.article-header__content__title,.facts__container__column__content__text h1,.featured-articles__header__content__title,.headline__title,.related-content__title,.related-stream__header__title,.rich-text__container__content h1 {
+        font-size:30px;
+        line-height: 38px
+    }
+}
+
+@media print {
+    .accordion__container__item__content h1,.article--full-width .article__link__content__title,.article--large-font-size .article__link__content__title,.article-header__content__title,.facts__container__column__content__text h1,.featured-articles__header__content__title,.headline__title,.related-content__title,.related-stream__header__title,.rich-text__container__content h1 {
+        font-size: 26pt
+    }
+}
+
+.accordion__container__item__content h2,.article--medium-font-size .article__link__content__title,.facts__container__column__content__text h2,.family-tree h2,.quote__container__title,.rich-text__container__content h2,.royal-line__monarch__item__content:before,.section-header__container__title,.take-over-custom__container__content__title,.take-over__container__content__title {
+    font-family: Lora,Georgia,Times,serif;
+    font-size: 36px;
+    line-height: 47px;
+    font-weight: 400
+}
+
+@media screen and (max-width: 1219px) {
+    .accordion__container__item__content h2,.article--medium-font-size .article__link__content__title,.facts__container__column__content__text h2,.family-tree h2,.quote__container__title,.rich-text__container__content h2,.royal-line__monarch__item__content:before,.section-header__container__title,.take-over-custom__container__content__title,.take-over__container__content__title {
+        font-size:34px;
+        line-height: 45px
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .accordion__container__item__content h2,.article--medium-font-size .article__link__content__title,.facts__container__column__content__text h2,.family-tree h2,.quote__container__title,.rich-text__container__content h2,.royal-line__monarch__item__content:before,.section-header__container__title,.take-over-custom__container__content__title,.take-over__container__content__title {
+        font-size:26px;
+        line-height: 34px
+    }
+}
+
+@media print {
+    .accordion__container__item__content h2,.article--medium-font-size .article__link__content__title,.facts__container__column__content__text h2,.family-tree h2,.quote__container__title,.rich-text__container__content h2,.royal-line__monarch__item__content:before,.section-header__container__title,.take-over-custom__container__content__title,.take-over__container__content__title {
+        font-size: 20pt
+    }
+}
+
+.accordion__container__item__content h3,.article__link__content__title,.audio__container__title,.calendar__header__title,.facts__container__column__content__text h3,.home-page__header__title,.image-top__hero__portrait .image-top__hero__title,.rich-text__container__content h3,.royal-line__monarch__item__content__title,.royal-line__monarch__slider__header__title {
+    font-family: Lora,Georgia,Times,serif;
+    font-size: 26px;
+    line-height: 36px;
+    font-weight: 400
+}
+
+
+
