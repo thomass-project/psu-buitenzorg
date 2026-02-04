@@ -190,16 +190,23 @@
     </footer>
 
     <script>
+        // Init: Load data dari Session Storage ke Form
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('surname').value = sessionStorage.getItem('surname') || '';
             document.getElementById('family_name').value = sessionStorage.getItem('family_name') || '';
             document.getElementById('email').value = sessionStorage.getItem('email') || '';
         });
 
+        // Handle Save
         document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Simpan data baru
             sessionStorage.setItem('surname', document.getElementById('surname').value);
             sessionStorage.setItem('family_name', document.getElementById('family_name').value);
             sessionStorage.setItem('email', document.getElementById('email').value);
+            
+            // Tampilkan Notifikasi Sukses
             showNotif('success');
         });
 
@@ -212,6 +219,7 @@
                 notif.classList.add('translate-x-0', 'opacity-100');
             }, 100);
             
+            // Auto close after 3s
             setTimeout(closeNotif, 3000);
         }
 
@@ -221,7 +229,8 @@
                 notif.classList.remove('translate-x-0', 'opacity-100');
             }
         }
-        
+
+        // Navbar Scroll
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             const logo = document.getElementById('nav-logo');
@@ -242,5 +251,6 @@
             }
         });
     </script>
+
 </body>
 </html>
