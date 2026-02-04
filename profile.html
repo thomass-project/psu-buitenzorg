@@ -83,8 +83,8 @@
         </div>
     </nav>
 
-    <div id="notification" class="fixed top-24 right-20 z-[100] transform transition-all duration-500 ease-in-out translate-x-full opacity-0">
-        <div id="notif-box" class="flex items-center p-4 mb-4 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-l-4 bg-white border-green-500 min-w-[320px]">
+    <div id="notification" class="fixed top-24 right-5 md:right-10 z-[100] transform transition-all duration-500 ease-in-out translate-x-full opacity-0 hidden">
+        <div id="notif-box" class="flex items-center p-4 mb-4 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.2)] border-l-4 bg-white border-green-500 min-w-[300px] max-w-sm">
             <div id="notif-icon-box" class="inline-flex items-center justify-center flex-shrink-0 w-10 h-10 rounded-full text-green-500 bg-green-50">
                 <i id="notif-icon" class="fas fa-check-circle text-lg"></i>
             </div>
@@ -92,7 +92,7 @@
                 <p id="notif-title" class="font-bold text-uni-primary text-sm leading-none">Update Successful</p>
                 <p id="notif-msg" class="text-gray-500 text-xs mt-1">Your profile info is now up to date.</p>
             </div>
-            <button onclick="closeNotif()" class="absolute top-2 right-2 text-gray-300 hover:text-gray-600 transition">
+            <button type="button" onclick="closeNotif()" class="absolute top-2 right-2 text-gray-300 hover:text-gray-600 transition">
                 <i class="fas fa-times text-xs"></i>
             </button>
         </div>
@@ -190,47 +190,49 @@
     </footer>
 
     <script>
-        // Init: Load data dari Session Storage ke Form
         document.addEventListener("DOMContentLoaded", function() {
             document.getElementById('surname').value = sessionStorage.getItem('surname') || '';
             document.getElementById('family_name').value = sessionStorage.getItem('family_name') || '';
             document.getElementById('email').value = sessionStorage.getItem('email') || '';
         });
 
-        // Handle Save
         document.getElementById('profileForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            
-            // Simpan data baru
+
             sessionStorage.setItem('surname', document.getElementById('surname').value);
             sessionStorage.setItem('family_name', document.getElementById('family_name').value);
             sessionStorage.setItem('email', document.getElementById('email').value);
             
-            // Tampilkan Notifikasi Sukses
             showNotif('success');
         });
 
         const notif = document.getElementById('notification');
-
+        let notifTimeout; 
+        
         function showNotif(type) {
             notif.classList.remove('hidden');
+        
             setTimeout(() => {
                 notif.classList.remove('translate-x-full', 'opacity-0');
                 notif.classList.add('translate-x-0', 'opacity-100');
-            }, 100);
+            }, 10); 
             
-            // Auto close after 3s
-            setTimeout(closeNotif, 3000);
+            if (notifTimeout) clearTimeout(notifTimeout);
+        
+            notifTimeout = setTimeout(closeNotif, 3000);
         }
-
+        
         function closeNotif() {
             if (notif) {
                 notif.classList.add('translate-x-full', 'opacity-0');
                 notif.classList.remove('translate-x-0', 'opacity-100');
+        
+                setTimeout(() => {
+                    notif.classList.add('hidden');
+                }, 500);
             }
         }
 
-        // Navbar Scroll
         window.addEventListener('scroll', function() {
             const navbar = document.getElementById('navbar');
             const logo = document.getElementById('nav-logo');
@@ -254,3 +256,4 @@
 
 </body>
 </html>
+
